@@ -16,6 +16,7 @@
 (global-set-key (kbd "s-<left>") 'beginning-of-line) ;cmd-left
 (global-set-key (kbd "s-<right>") 'end-of-line)      ;cmd-right
 (global-set-key (kbd "C-M-v") 'helm-show-kill-ring)  ;for some reason cant makethis be C-M-v
+(global-set-key (kbd "s-g") 'goto-line)  ;for some reason cant makethis be C-M-v
 
 
 (global-set-key (kbd "s-P") 'helm-M-x)               ;cmd-shift-p  this way works better
