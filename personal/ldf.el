@@ -1,9 +1,22 @@
 ;note if any of the bindings throw an error evalulation of the file will stop and all bindings below wont work
 
+                                        ;http://stackoverflow.com/questions/557282/in-emacs-whats-the-best-way-for-keyboard-escape-quit-not-destroy-other-windows
+;this makes keyboard escape quit work :)
+(defadvice keyboard-escape-quit (around my-keyboard-escape-quit activate)
+  (let (orig-one-window-p)
+    (fset 'orig-one-window-p (symbol-function 'one-window-p))
+    (fset 'one-window-p (lambda (&optional nomini all-frames) t))
+    (unwind-protect
+        ad-do-it
+      (fset 'one-window-p (symbol-function 'orig-one-window-p)))))
+
+
+
 ;fundamental
 (global-set-key (kbd "C-q") 'describe-key) ;ctrl-q
 (global-unset-key (kbd "<escape>"))
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit) ;key board escape quit seems to work better
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+;(global-set-key (kbd "<escape>") 'keyboard-quit) ;key board escape quit seems to work better however it kills open panes :(
 
 ;files
 (global-set-key (kbd "s-s") 'save-buffer) ;cmd-s
