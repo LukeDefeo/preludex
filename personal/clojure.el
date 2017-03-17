@@ -36,6 +36,18 @@
 (add-hook 'cider-repl-mode-hook 'my-cider-mode-keys)
 
 
+(defun my-clojure-keys ()
+  "Modify keymaps used by repl."
+  (local-set-key (kbd "C-.")   'paredit-forward-slurp-sexp)
+  (local-set-key (kbd "C-,")   'paredit-backward-slurp-sexp)
+  (local-set-key (kbd "C->")   'paredit-forward-barf-sexp)
+  (local-set-key (kbd "C-<")   'paredit-forward-bark-sexp)
+  (local-set-key (kbd "<C-backspace>")   'paredit-splice-sexp-killing-backward)
+
+;  (local-set-key (kbd "<down>") 'cider-repl-next-input)
+  )
+
+(add-hook 'clojure-mode-hook 'my-clojure-keys)
 
 ;;
 ;; Clojure mode font-locking for partial
