@@ -70,7 +70,7 @@
     ;; extra prefix for projectile
     (define-key map (kbd "s-p") 'projectile-command-map)
     ;; make some use of the Super key
-    (define-key map (kbd "s-g") 'god-local-mode)
+;    (define-key map (kbd "s-g") 'god-local-mode)
     (define-key map (kbd "s-r") 'crux-recentf-ido-find-file)
     (define-key map (kbd "s-j") 'crux-top-join-line)
     (define-key map (kbd "s-k") 'crux-kill-whole-line)
@@ -78,7 +78,7 @@
     (define-key map (kbd "s-m l") 'magit-log)
     (define-key map (kbd "s-m f") 'magit-log-buffer-file)
     (define-key map (kbd "s-m b") 'magit-blame)
-    (define-key map (kbd "s-o") 'crux-smart-open-line-above)
+;    (define-key map (kbd "s-o") 'crux-smart-open-line-above)
 
     map)
   "Keymap for Prelude mode.")
