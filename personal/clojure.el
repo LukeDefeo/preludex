@@ -14,7 +14,32 @@
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 (add-hook 'clojure-mode-hook          #'enable-paredit-mode)
 
+(eval-after-load "clojure-mode"
+  '(progn
+     (bind-key  "<C-return>" 'cider-eval-sexp-at-point clojure-mode-map)
+     (bind-key  "<C-s-return>" 'cider-eval-defun-at-point clojure-mode-map)
+     (bind-key  "<C-M-return>" 'cider-eval-last-sexp clojure-mode-map)
+     (bind-key  "<C-M-s-return>" 'cider-pprint-eval-last-sexp clojure-mode-map)
+     )
+  )
 
+;; (eval-after-load 'cua-mode
+;;   '(unbind-key "<C-return>" cua-global-keymap))
+
+
+
+
+
+
+(bind-key*  "<C-return>"  'helm-locate)
+(bind-key*  (kbd "<C-s-return>")  'helm-locate)
+;(bind-key*  (kbd "<C-return>")  'helm-locate)
+;(eval-after-load "clojure-mode")
+;(bind-key  "C-u" 'helm-locate clojure-mode-map)
+;(bind-key  "C-RET" 'cider-eval-sexp-at-point clojure-mode-map)
+;(bind-key  "C-s-RET" 'cider-eval-defun-at-point clojure-mode-map)
+;(bind-key  "C-M-RET" 'cider-eval-last-sexp clojure-mode-map)
+;(bind-key  "C-M-s-RET" 'cider-pprint-eval-last-sexp clojure-mode-map)
 
 ;; Add more natural <up> and <down> key bindings for nrepl mode
 (defun my-nrepl-mode-keys ()
@@ -35,7 +60,6 @@
 
 (add-hook 'cider-repl-mode-hook 'my-cider-mode-keys)
 
-
 (defun my-clojure-keys ()
   "Modify keymaps used by repl."
   (local-set-key (kbd "C-.")   'paredit-forward-slurp-sexp)
@@ -43,8 +67,11 @@
   (local-set-key (kbd "C->")   'paredit-forward-barf-sexp)
   (local-set-key (kbd "C-<")   'paredit-forward-bark-sexp)
   (local-set-key (kbd "<C-backspace>")   'paredit-splice-sexp-killing-backward)
+  (local-set-key (kbd "C-F")   ' cider-load-buffer)
 
-;  (local-set-key (kbd "<down>") 'cider-repl-next-input)
+;(local-set-key (kbd "" 'cider-pprint-eval-defun-at-point))
+
+                                        ;  (local-set-key (kbd "<down>") 'cider-repl-next-input)
   )
 
 (add-hook 'clojure-mode-hook 'my-clojure-keys)
