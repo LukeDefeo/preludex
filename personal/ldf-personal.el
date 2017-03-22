@@ -41,17 +41,25 @@
 (global-set-key (kbd "s-S") 'write-file) ;cmd-shift-s
 (global-set-key (kbd "s-w") 'kill-buffer) ;cmd-w
 (global-set-key (kbd "s-W") 'kill-buffer-and-window) ;cmd-shift-w dont change this
+(bind-key* "s-n" 'crux-create-scratch-buffer)
+(bind-key* "C-R" 'crux-rename-buffer-and-file)
 
 (bind-key*  "s-o" 'projectile-find-file )
 (bind-key*  "s-O" 'helm-find-files)
 (bind-key*  "s-M-o" 'helm-locate)
 
+(bind-key* "s-d" 'crux-duplicate-current-line-or-region)
+(bind-key* "s-D" 'crux-duplicate-and-comment-current-line-or-region)
+
+(bind-key* (kbd "s-f") 'helm-ag-this-file)
+(bind-key* (kbd "C-F") 'helm-ag-project-root)
+
 ;(global-set-key (kbd "s-O") 'helm-locate)      ;cmd-shift-
 
-(global-set-key (kbd "<C-return>") 'helm-locate)      ;cmd-shift-
+;(global-set-key (kbd "<C-return>") 'helm-locate)      ;cmd-shift-
 
 ;global nav
-(global-set-key (kbd "s-<left>") 'beginning-of-line) ;cmd-left
+(global-set-key (kbd "s-<left>") 'crux-move-beginning-of-line) ;cmd-left
 (global-set-key (kbd "s-<right>") 'end-of-line)      ;cmd-right
 (global-set-key (kbd "C-M-v") 'helm-show-kill-ring)  ;for some reason cant makethis be C-M-v
 ;(global-set-key (kbd "<backspace>")   'kill-region) ; this reaks ackspace
