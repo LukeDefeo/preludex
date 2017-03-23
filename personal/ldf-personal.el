@@ -70,6 +70,10 @@
 (global-set-key (kbd "s-<left>") 'crux-move-beginning-of-line) ;cmd-left
 (global-set-key (kbd "s-<right>") 'end-of-line)      ;cmd-right
 (global-set-key (kbd "C-M-v") 'helm-show-kill-ring)  ;for some reason cant makethis be C-M-v
+(bind-key* "M-<up>" 'backward-paragraph)
+(bind-key* "M-<down>" 'forward-paragraph)
+(bind-key* "s-S-<down>" 'move-text-down)
+(bind-key* "s-S-<up>" 'move-text-up)
 ;(global-set-key (kbd "<backspace>")   'kill-region) ; this breaks ackspace
 (global-set-key (kbd "s-g") 'goto-line)
 
