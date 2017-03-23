@@ -53,6 +53,10 @@
 ;; Setting the current theme
 ;;
 (load-theme-by-name 'dracula)
+;; (load-theme-by-name 'solarized-dark)
+;; (load-theme-by-name 'atom-one-dark)
+;; (load-theme-by-name 'gotham)
+
 
 ;; hightlight modeline of active buffer
 (set-face-foreground 'mode-line "black")
