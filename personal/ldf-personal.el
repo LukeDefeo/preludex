@@ -1,4 +1,7 @@
 ;note if any of the bindings throw an error evalulation of the file will stop and all bindings below wont work
+;; note to hook into minor mode map, find the map in question probably by doing C-q, keystroke and it will tell you,
+;; then do s-b to locate which file its defined in then do evai-after-load "fileame" and the map shoudl be avaulable
+;;fundamental
 
  ;http://stackoverflow.com/questions/557282/in-emacs-whats-the-best-way-for-keyboard-escape-quit-not-destroy-other-windows
 ;this makes keyboard escape quit work :)
@@ -10,21 +13,23 @@
         ad-do-it
       (fset 'one-window-p (symbol-function 'orig-one-window-p)))))
 
-
-
-;fundamental
 (global-set-key (kbd "C-q") 'describe-key) ;ctrl-q
 (global-unset-key (kbd "<escape>"))
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-;(global-set-key (kbd "<escape>") 'keyboard-quit) ;key board escape quit seems to work better however it kills open panes :(
+
+;;show key map
+
+(bind-key* "C-/" 'helm-descbinds)
 
 
-;; (bind-keys*
-;;  ( "<C-return>" . helm-locate) )
-;; ;(global-set-key (kbd "C-RET") 'describe-key) ;ctrl-q
+
+(eval-after-load "cua-base"
+  '(unbind-key "<C-return>" cua-global-keymap))
 
 
+;;line level
+(bind-key* "<s-backspace>" 'crux-kill-line-backwards)
 (bind-key* "s-/" 'comment-line)
 
 ;; ;easy mark is the expanding thing
@@ -36,7 +41,12 @@
     ;; (bind-key "M-<up>" 'easy-kill-expand  easy-kill-base-map)
     ;; (bind-key "M-<down>" 'easy-kill-shrink  easy-kill-base-map)))
 
-;files
+
+;;project nav
+(bind-key* "s-b" 'elisp-slime-nav-find-elisp-thing-at-point)
+
+;;files
+
 (global-set-key (kbd "s-s") 'save-buffer) ;cmd-s
 (global-set-key (kbd "s-S") 'write-file) ;cmd-shift-s
 (global-set-key (kbd "s-w") 'kill-buffer) ;cmd-w
@@ -48,33 +58,26 @@
 (bind-key*  "s-O" 'helm-find-files)
 (bind-key*  "s-M-o" 'helm-locate)
 
+
 (bind-key* "s-d" 'crux-duplicate-current-line-or-region)
 (bind-key* "s-D" 'crux-duplicate-and-comment-current-line-or-region)
 
 (bind-key* (kbd "s-f") 'helm-ag-this-file)
 (bind-key* (kbd "C-F") 'helm-ag-project-root)
 
-;(global-set-key (kbd "s-O") 'helm-locate)      ;cmd-shift-
-
-;(global-set-key (kbd "<C-return>") 'helm-locate)      ;cmd-shift-
 
 ;global nav
 (global-set-key (kbd "s-<left>") 'crux-move-beginning-of-line) ;cmd-left
 (global-set-key (kbd "s-<right>") 'end-of-line)      ;cmd-right
 (global-set-key (kbd "C-M-v") 'helm-show-kill-ring)  ;for some reason cant makethis be C-M-v
-;(global-set-key (kbd "<backspace>")   'kill-region) ; this reaks ackspace
-(global-set-key (kbd "s-g") 'goto-line)  ;for some reason cant makethis be C-M-v
+;(global-set-key (kbd "<backspace>")   'kill-region) ; this breaks ackspace
+(global-set-key (kbd "s-g") 'goto-line)
 
 
 (global-set-key (kbd "s-P") 'helm-M-x)               ;cmd-shift-p  this way works better
 (global-set-key (kbd "M-x") 'helm-M-x)               ;cmd-shift-p
 (global-set-key (kbd "s-e") 'helm-buffers-list)      ;cmd-e
 
-;(global-set-key (kbd "s-e") 'crux-recentf-find-fil)  ;cmd-e better recent files list but doesnt work
 
 
-
-;(global-unset-key (kbd "s-p <escape>"))
-
-
-;;;ldf.el ends here
+;;;ldf-personal.el ends here
