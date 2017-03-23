@@ -22,11 +22,26 @@
 
 (bind-key* "C-/" 'helm-descbinds)
 
+(defvar structual-bindings '(progn
+                              (bind-key "C-." 'paredit-forward-slurp-sexp paredit-mode-map)
+                              (bind-key "C-,"   'paredit-backward-slurp-sexp  paredit-mode-map)
+                              (bind-key  "C->"   'paredit-forward-barf-sexp  paredit-mode-map)
+                              (bind-key "C-<"   'paredit-forward-bark-sexp  paredit-mode-map)
+                              (bind-key "<C-backspace>"   'paredit-splice-sexp  paredit-mode-map)
+                              (bind-key "C-<left>" 'paredit-backward paredit-mode-map)
+                              (bind-key "C-<right>" 'paredit-forward paredit-mode-map)
+                              (bind-key "C-<right>" 'paredit-forward paredit-mode-map)
+                              (bind-key "C-<down>" 'paredit-forward-down paredit-mode-map)
+                              (bind-key "C-<up>" 'paredit-backward-up paredit-mode-map)
+                              (bind-key "C-F"   ' cider-load-buffer) ))
+(eval-after-load "paredit"
+  structual-bindings)
 
+(eval-after-load "clojure-mode"
+  structual-bindings)
 
 (eval-after-load "cua-base"
   '(unbind-key "<C-return>" cua-global-keymap))
-
 
 ;;line level
 (bind-key* "<s-backspace>" 'crux-kill-line-backwards)
