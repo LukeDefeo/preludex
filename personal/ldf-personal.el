@@ -63,7 +63,9 @@
 (bind-key* "s-D" 'crux-duplicate-and-comment-current-line-or-region)
 
 (bind-key* (kbd "s-f") 'helm-ag-this-file)
-(bind-key* (kbd "C-F") 'helm-ag-project-root)
+(bind-key* (kbd "s-F") 'helm-ag-project-root)
+
+
 
 
 ;global nav
