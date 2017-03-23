@@ -1,7 +1,7 @@
 ;note if any of the bindings throw an error evalulation of the file will stop and all bindings below wont work
 ;; note to hook into minor mode map, find the map in question probably by doing C-q, keystroke and it will tell you,
 ;; then do s-b to locate which file its defined in then do evai-after-load "fileame" and the map shoudl be avaulable
-;;fundamental
+;;fundamental. If it errors you probably forgot to put a quote ' before the body of eval after load
 
  ;http://stackoverflow.com/questions/557282/in-emacs-whats-the-best-way-for-keyboard-escape-quit-not-destroy-other-windows
 ;this makes keyboard escape quit work :)
@@ -50,12 +50,10 @@
 ;; ;easy mark is the expanding thing
 (global-set-key (kbd "M-SPC") 'easy-mark) ;cmd-s
 
-;; (eval-after-load 'easy-kill-mode-sname
-  ;; (progn
-
-    ;; (bind-key "M-<up>" 'easy-kill-expand  easy-kill-base-map)
-    ;; (bind-key "M-<down>" 'easy-kill-shrink  easy-kill-base-map)))
-
+(eval-after-load 'easy-kill
+  '(progn
+     (bind-key "<up>" 'easy-kill-expand  easy-kill-base-map)
+     (bind-key "<down>" 'easy-kill-shrink  easy-kill-base-map)))
 
 ;;project nav
 (bind-key* "s-b" 'elisp-slime-nav-find-elisp-thing-at-point)
