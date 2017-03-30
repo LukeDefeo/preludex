@@ -17,6 +17,9 @@
 (eval-after-load "clojure-mode"
   '(progn
      (enable-paredit-mode)
+
+     (bind-key  "s-u" 'cljr-find-usages clojure-mode-map)
+     (bind-key  "<C-M-s-return>" 'cider-visit-error-buffer clojure-mode-map)
      (bind-key  "<C-return>" 'cider-pprint-eval-defun-at-point clojure-mode-map)
      (bind-key  "<M-return>" 'cider-pprint-eval-last-sexp clojure-mode-map)
      (bind-key  "<C-S-return>" 'cider-eval-sexp-at-point clojure-mode-map)
@@ -24,6 +27,7 @@
      (bind-key "<C-s-M-return>" 'cider-switch-to-repl-buffer clojure-mode-map)
      (bind-key  "C-f" 'cider-eval-buffer clojure-mode-map)
      )
+
   )
 
 

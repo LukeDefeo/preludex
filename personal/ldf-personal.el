@@ -17,6 +17,42 @@
 (global-unset-key (kbd "<escape>"))
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
+(eval-after-load 'clj-refactor
+  '(setq cljr-warn-on-eval nil))
+
+;;neo tree
+;;(setq projectile-switch-project-action 'neotree-projectile-action) this is annoying and breaks the initial projectile file search
+(setq neo-theme 'nerd)
+(bind-key "s-\\" 'neotree-toggle)
+(bind-key "s-|" 'neotree-projectile-action)
+
+(bind-key* "C-`" 'projectile-run-shell)
+
+(eval-after-load "prelude"
+  (unbind-key "<C-S-return>" prelude-mode-map))
+
+;(face-attributes-as-vector 'neo-dir-link-face)
+(eval-after-load "neotree"
+  '(custom-set-faces
+   ;;to see colors do s-p list-colors-display
+   (set-face-foreground  'neo-button-face "headerColor" nil)
+   (set-face-foreground  'neo-file-link-face "textBackgroundColor" nil)
+   (set-face-foreground  'neo-dir-link-face "headerColor" nil)
+   (set-face-foreground  'neo-header-face "headerColor" nil)
+   (set-face-foreground  'neo-expand-btn-face "headerColor" nil)
+   (set-face-foreground  'neo-root-dir-face "Magenta" nil)
+   (set-face-foreground  'neo-banner-face "Magenta" nil)
+
+                                        ;'(cursor ((t (:background "gold" :foreground "#151718")))) would be good to remove curser for neotree
+
+   (set-face-attribute 'neo-root-dir-face      nil :height 150 :font "Menlo")
+   (set-face-attribute 'neo-button-face      nil :height 150 :font "Menlo")
+   (set-face-attribute 'neo-file-link-face   nil :height 150 :font "Menlo")
+   (set-face-attribute 'neo-dir-link-face    nil :height 150 :font "Menlo")
+   (set-face-attribute 'neo-header-face      nil :height 150 :font "Menlo")
+   (set-face-attribute 'neo-expand-btn-face  nil :height 150 :font "Menlo")
+   ))
+
 
 ;;show key map
 
@@ -67,30 +103,46 @@
 (bind-key* "s-n" 'crux-create-scratch-buffer)
 (bind-key* "C-R" 'crux-rename-buffer-and-file)
 
+
 (bind-key*  "s-o" 'projectile-find-file )
 (bind-key*  "s-O" 'helm-find-files)
 (bind-key*  "s-M-o" 'helm-locate)
 
-
-(bind-key* "s-d" 'crux-duplicate-current-line-or-region)
-(bind-key* "s-D" 'crux-duplicate-and-comment-current-line-or-region)
-
+;;searching
 (bind-key* (kbd "s-f") 'helm-ag-this-file)
 (bind-key* (kbd "s-F") 'helm-ag-project-root)
 
+(bind-key* "C-r" 'isearch-backward)
+(bind-key* "s-r" 'anzu-query-replace)
+;(bind-key* "C-M-r" 'anzu-query-replace-regexp)
+;;good thigns to bind
+;;anzu, rgrep where search withing the grep result, with rgrep you can filter on file type
+;;also silver search you can also do global replace
+;;incremental search isnt bad
+(bind-key* "s-d" 'crux-duplicate-current-line-or-region)
+(bind-key* "s-D" 'crux-duplicate-and-comment-current-line-or-region)
 
+
+
+(bind-key* "C-0" 'delete-window)
+(bind-key* "C-1" 'delete-other-windows)
+(bind-key* "C-2" 'split-window-vertically)
+(bind-key* "C-3" 'split-window-horizontally)
 
 
 ;global nav
 (global-set-key (kbd "s-<left>") 'crux-move-beginning-of-line) ;cmd-left
 (global-set-key (kbd "s-<right>") 'end-of-line)      ;cmd-right
 (global-set-key (kbd "C-M-v") 'helm-show-kill-ring)  ;for some reason cant makethis be C-M-v
+(bind-key "s-<up>" 'beginning-of-buffer)
+(bind-key "s-<down>" 'end-of-buffer)
 (bind-key* "M-<up>" 'backward-paragraph)
 (bind-key* "M-<down>" 'forward-paragraph)
 (bind-key* "s-S-<down>" 'move-text-down)
 (bind-key* "s-S-<up>" 'move-text-up)
 ;(global-set-key (kbd "<backspace>")   'kill-region) ; this breaks ackspace
 (global-set-key (kbd "s-g") 'goto-line)
+
 
 
 (global-set-key (kbd "s-P") 'helm-M-x)               ;cmd-shift-p  this way works better
