@@ -108,8 +108,18 @@
 (bind-key*  "s-O" 'helm-find-files)
 (bind-key*  "s-M-o" 'helm-locate)
 
+(eval-after-load "helm-buffers.el"
+  '(progn
+    (bind-key (kbd "s-w") 'helm-buffer-run-kill-persistent helm-buffer-map)
+    (bind-key (kbd "s-k") 'helm-buffer-run-kill-persistent helm-buffer-map)))
+
 ;;searching
-(bind-key* (kbd "s-f") 'helm-ag-this-file)
+
+
+(bind-key* (kbd "s-f") 'isearch-forward)
+(eval-after-load "isearch.el"
+  '(bind-key (kbd "<return>") 'isearch-repeat-forward isearch-mode-map))
+
 (bind-key* (kbd "s-F") 'helm-ag-project-root)
 
 (bind-key* "C-r" 'isearch-backward)
